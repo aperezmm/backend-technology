@@ -1,3 +1,11 @@
+//Conexión mongodb
+const mongoose = require('mongoose');
+const {MONGO_URI} = require('../config');
+const {Technology} = require('../models');
+
+mongoose.connect(MONGO_URI, {useNewUrlParser: true, useUnifiedTopology: true});
+
+
 const technologies = [
     {
       name: "Node.js",
@@ -76,5 +84,10 @@ const technologies = [
       tags: ["javascript", "vue", "frontend"],
       logo: "vue.svg"
     }
-  ]
+  ];
+
+Technology.create(technologies).then(() =>{
+    console.log("Technologies created");
+    mongoose.disconnect();
+}).catch(console.error);
   
